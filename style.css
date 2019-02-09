@@ -1,0 +1,78 @@
+table {
+font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+font-size: 14px;
+border-radius: 10px;
+border-spacing: 0;
+text-align: center;
+}
+th {
+background: #BCEBDD;
+color: white;
+text-shadow: 0 1px 1px #2D2020;
+padding: 5px 10px;
+}
+th, td {
+border-style: solid;
+border-width: 0 1px 1px 0;
+border-color: white;
+}
+th:first-child, td:first-child {
+text-align: left;
+}
+th:first-child {
+border-top-left-radius: 10px;
+}
+th:last-child {
+border-top-right-radius: 10px;
+border-right: none;
+}
+td {
+padding: 5px 10px;
+background: #F8E391;
+}
+tr:last-child td:first-child {
+border-radius: 0 0 0 10px;
+}
+tr:last-child td:last-child {
+border-radius: 0 0 10px 0;
+}
+tr td:last-child {
+border-right: none;
+}
+
+.fufle{
+	background-color: red;
+}
+.layout { position: relative; /* Относительное позиционирование */ }
+.layout DIV { position: absolute; /* Абсолютное позиционирование */ }
+.col1 {
+ 	left: 0; /* Положение левого края */
+ 	right: 300px; /* Положение правого края */
+}
+.col2 {
+	 width: 200px; /* Ширина колонки */
+	 right: 100px; /* Сдвигаем влево на ширину колонки 3 */
+}
+.col3 { 
+	width: 100px; 
+	right: 0; 
+}
+a {
+  text-decoration: none;
+  outline: none;
+  display: inline-block;
+  color: white;
+  padding: 20px 30px;
+  border-radius: 10px;
+  font-family: 'Montserrat', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  background-image: linear-gradient(to right, #9EEFE1 0%, #4830F0 51%, #9EEFE1 100%);
+  background-size: 200% auto;
+  box-shadow: 0 0 20px rgba(0,0,0,.1);
+  transition: .5s;
+}
+a:hover {background-position: right center;} 
+input{
+	border-radius: 4px;
+}
