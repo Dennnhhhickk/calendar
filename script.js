@@ -59,10 +59,10 @@ $('document').ready(function(){
 					var year;
 					if ((z * 7 + jj + 1 - first) <= monthlen[i] && (z * 7 + 1 + jj - first) > 0)
 					{
-						var stat = "class = \"     \"";
+						year = Fyear;
+						var stat = "class = \"gt " + year + ' ' + i + ' ' + (z * 7 + jj + 1 - first) +" \"";
 						for (q in eventy)
 						{
-							year = Fyear;
 							if (eventy[q] == year && eventm[q] == i && eventd[q] == (z * 7 + jj + 1 - first))
 							{
 								stat = "class = \"fufle " + year + ' ' + i + ' ' + (z * 7 + jj + 1 - first) +" \"";
@@ -73,12 +73,12 @@ $('document').ready(function(){
 					else 
 						if ((z * 7 + 1 + jj - first) > 0)
 						{
-							var stat = "class = \"     \"";
+							year = Fyear;
+							if (i == N - 1)
+								year++;
+							var stat = "class = \"gt " + year + ' ' + parseInt(parseInt(i) + 1) % N + ' ' + (parseInt(parseInt((z * 7 + 1 + jj - first - 1)) % parseInt(monthlen[i]) + 1)) +" \"";
 							for (q in eventy)
 							{
-								year = Fyear;
-								if (i == N - 1)
-									year++;
 								if (eventy[q] == year && eventm[q] == parseInt(parseInt(i) + 1) % N && eventd[q] == (parseInt(parseInt((z * 7 + 1 + jj - first - 1)) % parseInt(monthlen[i]) + 1)))
 								{
 									stat = "class = \"fufle " + year + ' ' + parseInt(parseInt(i) + 1) % N + ' ' + (parseInt(parseInt((z * 7 + 1 + jj - first - 1)) % parseInt(monthlen[i]) + 1)) +" \"";
@@ -89,12 +89,12 @@ $('document').ready(function(){
 						}
 						else
 						{
-							var stat = "class = \"     \"";
+							year = Fyear;
+							if (i == 0)
+								year--;
+							var stat = "class = \"gt " + year + ' ' + parseInt(parseInt(i) - 1 + N) % N + ' ' + parseInt(parseInt(monthlen[(i - 1 + N) % N]) + parseInt(z * 7 + 1 + jj - first)) +" \"";;
 							for (q in eventy)
 							{
-								year = Fyear;
-								if (i == 0)
-									year--;
 								if (eventy[q] == year && eventm[q] == parseInt(parseInt(i) - 1 + N) % N && eventd[q] == parseInt(parseInt(monthlen[(i - 1 + N) % N]) + parseInt(z * 7 + 1 + jj - first)))
 								{
 									stat = "class = \"fufle " + year + ' ' + parseInt(parseInt(i) - 1 + N) % N + ' ' + parseInt(parseInt(monthlen[(i - 1 + N) % N]) + parseInt(z * 7 + 1 + jj - first)) +" \"";
@@ -163,18 +163,33 @@ $('document').ready(function(){
 			else
 				tmpa += str[parseInt(i)];
 		}
-
-		for (var q in eventy)
-		{
-			if (eventy[q] == parseInt(tmp[2]) && eventm[q] == parseInt(tmp[3]) && eventd[q] == parseInt(tmp[4]))
-				ans += event[q] + '\n';
-		}
-		return ans;
+		return tmp;
 	}
 
 	$(document).on('click', function(e) {
-		if (processing($(e.target).attr('class')) != "")
-			alert(processing($(e.target).attr('class')));
+		var tmp = processing($(e.target).attr('class'));
+		if (tmp[1] == 'fufle')
+		{
+			var ans = "";
+			for (var q in eventy)
+			{
+				if (eventy[q] == parseInt(tmp[2]) && eventm[q] == parseInt(tmp[3]) && eventd[q] == parseInt(tmp[4]))
+					ans += event[q] + '\n';
+			}
+			alert(ans);
+		}
+
+		var bol = confirm("Хотите добавить уведомление?");
+
+		if (tmp[1] == 'gt' || bol)
+		{
+			var text = (prompt('Что будет', ''));
+			event.push(text);
+			eventy.push(tmp[2]);
+			eventm.push(tmp[3]);
+			eventd.push(tmp[4]);
+			MAIN();
+		}
 	});
 
 	$('#View').on('click', function()
